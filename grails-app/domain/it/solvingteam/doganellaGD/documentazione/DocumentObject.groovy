@@ -5,6 +5,8 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Date;
 
+import org.hibernate.Hibernate;
+
 class DocumentObject {
 
    //id assegnato al file nel software documentale

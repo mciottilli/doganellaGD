@@ -22,7 +22,7 @@
                     <thead>
                         <tr>
                         
-                            <g:sortableColumn property="id" title="${message(code: 'pratica.id.label', default: 'Id')}" />
+                           
                         
                             <g:sortableColumn property="numeroProtocollo" title="${message(code: 'pratica.numeroProtocollo.label', default: 'Numero Protocollo')}" />
                         
@@ -40,9 +40,9 @@
                     <g:each in="${praticaInstanceList}" status="i" var="praticaInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${praticaInstance.id}">${fieldValue(bean: praticaInstance, field: "id")}</g:link></td>
+                            
                         
-                            <td>${fieldValue(bean: praticaInstance, field: "numeroProtocollo")}</td>
+                            <td><g:link action="show" id="${praticaInstance.id}">${fieldValue(bean: praticaInstance, field: "numeroProtocollo")}</g:link></td>
                         
                             <td><g:formatDate format="dd/MM/yyyy" date="${praticaInstance.data}" /></td>
                         

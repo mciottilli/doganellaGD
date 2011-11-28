@@ -22,12 +22,7 @@
                 <table>
                     <tbody>
                     
-                        <tr class="prop">
-                            <td  class="name"><g:message code="pratica.id.label" default="Id" /></td>
-                            
-                            <td  class="value">${fieldValue(bean: praticaInstance, field: "id")}</td>
-                            
-                        </tr>
+                        
                     
                         <tr class="prop">
                             <td  class="name"><g:message code="pratica.numeroProtocollo.label" default="Numero Protocollo" /></td>
@@ -39,7 +34,7 @@
                         <tr class="prop">
                             <td  class="name"><g:message code="pratica.data.label" default="Data" /></td>
                             
-                            <td  class="value"><g:formatDate date="${praticaInstance?.data}" /></td>
+                            <td  class="value"><g:formatDate format="dd/MM/yyyy" date="${praticaInstance?.data}" /></td>
                             
                         </tr>
                     
@@ -56,25 +51,20 @@
                             <td  class="value">${fieldValue(bean: praticaInstance, field: "note")}</td>
                             
                         </tr>
+                        
+                         <tr class="prop">
+                            <td  class="name"><g:message code="pratica.fruitore.label" default="Fruitore" /></td>
+                            
+                            <td  class="value">${praticaInstance?.fruitore?.encodeAsHTML()}</td>
+                            
+                        </tr>
                     
                         <tr class="prop">
                             <td  class="name"><g:message code="pratica.allegati.label" default="Allegati" /></td>
                             
                             <td  style="text-align: left;" class="value">
-                                <ul>
-                                <g:each in="${praticaInstance.allegati}" var="a">
-                                    <li><g:link controller="documentObject" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></li>
-                                </g:each>
-                                </ul>
+                               <g:link action="attachDocument" params="[id:praticaInstance.id]" >Allega</g:link>
                             </td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td  class="name"><g:message code="pratica.fruitore.label" default="Fruitore" /></td>
-                            
-                            <td  class="value"><g:link controller="fruitore" action="show" id="${praticaInstance?.fruitore?.id}">${praticaInstance?.fruitore?.encodeAsHTML()}</g:link></td>
-                            
                         </tr>
                     
                     </tbody>
