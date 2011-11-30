@@ -4,3 +4,9 @@
 target
 web-app/WEB-INF/classes/
 
+doganellaGD.iml
+doganellaGD.ipr
+doganellaGD.iws
+out/
+projectFilesBackup/
+doganellaGD-grailsPlugins.iml

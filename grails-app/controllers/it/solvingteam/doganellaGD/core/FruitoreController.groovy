@@ -97,4 +97,23 @@ class FruitoreController {
             redirect(action: "list")
         }
     }
+
+    def result = { FruitoreCommand cmd ->
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		def fruitoreInstanceList =  Fruitore.cercaFruitore(cmd, params)
+		render(view:"list",model:[fruitoreInstanceList: fruitoreInstanceList, fruitoreInstanceTotal: fruitoreInstanceList.totalCount])
+    }
+}
+
+class FruitoreCommand {
+
+	String nome
+	String cognome
+	String codice
+
+	 static constraints = {
+		nome (nullable:true)
+		cognome (nullable:true)
+		codice (nullable:true)
+    }
 }
