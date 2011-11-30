@@ -58,7 +58,7 @@ class FruitoreController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (fruitoreInstance.version > version) {
-                    
+
                     fruitoreInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'fruitore.label', default: 'Fruitore')] as Object[], "Another user has updated this Fruitore while you were editing")
                     render(view: "edit", model: [fruitoreInstance: fruitoreInstance])
                     return
@@ -100,20 +100,20 @@ class FruitoreController {
 
     def result = { FruitoreCommand cmd ->
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-		def fruitoreInstanceList =  Fruitore.cercaFruitore(cmd, params)
-		render(view:"list",model:[fruitoreInstanceList: fruitoreInstanceList, fruitoreInstanceTotal: fruitoreInstanceList.totalCount])
+        def fruitoreInstanceList = Fruitore.cercaFruitore(cmd, params)
+        render(view: "list", model: [fruitoreInstanceList: fruitoreInstanceList, fruitoreInstanceTotal: fruitoreInstanceList.totalCount])
     }
 }
 
 class FruitoreCommand {
 
-	String nome
-	String cognome
-	String codice
+    String nome
+    String cognome
+    String codice
 
-	 static constraints = {
-		nome (nullable:true)
-		cognome (nullable:true)
-		codice (nullable:true)
+    static constraints = {
+        nome(nullable: true)
+        cognome(nullable: true)
+        codice(nullable: true)
     }
 }

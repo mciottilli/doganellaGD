@@ -7,16 +7,11 @@ class Fruitore {
     Date dataNascita
     String codice
 
-
-
     static constraints = {
         nome(nullable: true)
         cognome(nullable: true)
         dataNascita(nullable: true)
     }
-
-
-
 
     @Override
     public String toString() {
@@ -39,6 +34,4 @@ class Fruitore {
 
         }
     }
-
-
 }
