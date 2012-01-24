@@ -3,7 +3,7 @@
 .settings
 target
 web-app/WEB-INF/classes/
-
+target-eclipse
 doganellaGD.iml
 doganellaGD.ipr
 doganellaGD.iws
