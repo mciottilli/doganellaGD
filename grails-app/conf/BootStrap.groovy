@@ -5,8 +5,9 @@ import it.solvingteam.doganellaGD.security.*;
 class BootStrap {
 
     def init = { servletContext ->
-		prepareUserRole()
-		setupDati()
+		log.info "ciaoo"
+		//prepareUserRole()
+		//setupDati()
     }
     def destroy = {
     }

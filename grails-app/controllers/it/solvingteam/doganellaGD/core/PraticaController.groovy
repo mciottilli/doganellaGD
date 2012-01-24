@@ -112,6 +112,8 @@ class PraticaController {
     }
 
     def result = {PraticaCommand cmd ->
+		log.info "cerca...."
+		println ('sei qui....')
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         def praticaInstanceList = Pratica.cercaPratiche(cmd, params)
         render(view: "list", model: [praticaInstanceList: praticaInstanceList, praticaInstanceTotal: praticaInstanceList.totalCount])
