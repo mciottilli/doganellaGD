@@ -12,7 +12,7 @@ class FruitoreController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [fruitoreInstanceList: Fruitore.list(params), fruitoreInstanceTotal: Fruitore.count()]
     }
-
+ 
     def create = {
         def fruitoreInstance = new Fruitore()
         fruitoreInstance.properties = params
