@@ -3,19 +3,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
+    <link rel="stylesheet" media="all" type="text/css"
+          href="${resource(dir: 'css/redmond', file: 'jquery-ui-1.8.13.custom.css')}"/>
+    <g:javascript src="jQuery/jquery-1.5.1.min.js"/>
+    <g:javascript src="jQuery/jquery-ui-1.8.12.custom.min.js"/>
+    <g:jqDatepickerLocale lang="it"/>
     <g:set var="entityName" value="${message(code: 'fruitore.label', default: 'Fruitore')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
 </head>
 
 <body>
-<div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a>
-    </span>
-    <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label"
-                                                                           args="[entityName]"/></g:link></span>
-    <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label"
-                                                                               args="[entityName]"/></g:link></span>
-</div>
+
 
 <div class="body">
     <h1><g:message code="default.edit.label" args="[entityName]"/></h1>
@@ -58,8 +56,7 @@
                                                             default="Data Nascita"/></label>
                     </td>
                     <td class="value ${hasErrors(bean: fruitoreInstance, field: 'dataNascita', 'errors')}">
-                        <g:datePicker name="dataNascita" precision="day" value="${fruitoreInstance?.dataNascita}"
-                                      default="none" noSelection="['': '']"/>
+                      <g:jqDatepicker name="dataNascita"  value="${fruitoreInstance?.dataNascita}" changeMonth="true" changeYear="true"/>
                     </td>
                 </tr>
 
@@ -84,6 +81,9 @@
                                                  onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
         </div>
     </g:form>
+     <div class="navigation">
+        <g:link class="button_nav" action="show" params="[id:fruitoreInstance.id]" ><g:message code="default.label.indietro" /></g:link>
+    </div>
 </div>
 </body>
 </html>

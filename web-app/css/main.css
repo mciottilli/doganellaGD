@@ -15,6 +15,8 @@ body {
     background: #fff;
     color: #333;
     font: 11px verdana, arial, helvetica, sans-serif;
+    width:60%;
+    margin:auto;
 }
 #headerLogo {
 	padding:20px;
@@ -66,11 +68,12 @@ input:focus, select:focus, textarea:focus {
 /* NAVIGATION MENU */
 
 .nav {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    border-style: solid none solid none;
+    /*background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;*/
+    /*border: 1px solid #ccc;*/
+   /* border-style: solid none solid none;*/
     margin-top: 5px;
     padding: 7px 12px;
+    float:right;
 }
 
 .menuButton {
@@ -86,6 +89,11 @@ input:focus, select:focus, textarea:focus {
     color: #333;
     padding-left: 25px;
 }
+.menuButton a.logout {
+    background: url(../images/skin/icon_logout.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
 .menuButton a.list {
     background: url(../images/skin/database_table.png) center left no-repeat;
     color: #333;
@@ -95,6 +103,26 @@ input:focus, select:focus, textarea:focus {
     background: url(../images/skin/database_add.png) center left no-repeat;
     color: #333;
     padding-left: 25px;
+}
+
+.navigation {
+	display: block;
+	text-align: center;
+	margin: 1em auto;
+	width: 99.9%;
+}
+
+.button_nav {
+	padding: 3px 5px 5px 9px;
+	font-size: 12px;
+	color: #5d61b0;
+	text-decoration: none;
+	text-align: center;
+	margin: 10px auto;
+	display: block;
+	width: 87px;
+	background: transparent url(../images/previous.png) no-repeat scroll 0 0;
+	text-decoration: none;
 }
 
 /* MESSAGES AND ERRORS */
@@ -137,7 +165,7 @@ td.errors textarea {
 /* TABLES */
 
 table {
-    border: 1px solid #ccc;
+    border: 1px solid #48802C;
     width: 100%
 }
 tr {
@@ -231,10 +259,14 @@ th.desc a {
     text-align: left;
     width: 15%;
     white-space: nowrap;
+    font-weight: bold;
+    background-color: #DFDFDF;
+    border:1px solid;
 }
 .prop .value {
     text-align: left;
     width: 85%;
+    border: 1px solid;
 }
 
 /* ACTION BUTTONS */

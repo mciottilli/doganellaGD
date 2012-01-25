@@ -13,12 +13,7 @@
 </head>
 
 <body>
-<div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a>
-    </span>
-    <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label"
-                                                                           args="[entityName]"/></g:link></span>
-</div>
+
 
 <div class="body">
     <h1><g:message code="default.create.label" args="[entityName]"/></h1>
@@ -77,10 +72,12 @@
         </div>
 
         <div class="buttons">
-            <span class="button"><g:submitButton name="create" class="save"
-                                                 value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
+            <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.confirm.label', default: 'Conferma')}"/></span>
         </div>
     </g:form>
+     <div class="navigation">
+        <g:link class="button_nav" action="list" ><g:message code="default.label.indietro" /></g:link>
+    </div>
 </div>
 </body>
 </html>

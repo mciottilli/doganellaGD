@@ -14,6 +14,7 @@
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
+    <g:if test="${praticaInstance.allegati}">
     <fieldset>
 
         <table>
@@ -25,19 +26,18 @@
                 <th>Elimina</th>
             </tr>
             </thead>
-            <g:each var="index" in="${praticaInstance.allegati}">
-                <tr>
+            <g:each var="index" status="i" in="${praticaInstance.allegati}">
+               <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                     <td>${index.docName}</td>
                     <td><g:formatDate format="dd/MM/yyy" date="${index.dataCreazione}"/></td>
-                    <td><g:link action="showDocumento" params="[id:index.id]">Mostra</g:link></td>
-                    <td><g:link action="deleteDocumento" params="[id:index.id,idPratica:praticaInstance.id]"
-                                onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">Elimina</g:link></td>
+                    <td><g:link action="showDocumento" params="[id:index.id]"><img src="${resource(dir:'images/skin',file:'database_show.png')}" alt="${message(code: 'default.label.table.detail')}" border="0" title="${message(code: 'default.label.table.detail')}" /></g:link></td>
+                    <td><g:link action="deleteDocumento" params="[id:index.id,idPratica:praticaInstance.id]" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><img src="${resource(dir:'images/skin',file:'database_delete.png')}" alt="${message(code: 'default.label.table.delete')}" border="0" title="${message(code: 'default.label.table.delete')}" /></g:link></td>
                 </tr>
             </g:each>
         </table>
 
     </fieldset>
-
+</g:if>
     <fieldset>
         <g:uploadForm>
 
@@ -61,7 +61,9 @@
             </div>
         </g:uploadForm>
     </fieldset>
-
+ <div class="navigation">
+       <g:link class="button_nav" action="show" params="[id:praticaInstance.id]" ><g:message code="default.label.indietro" /></g:link>
+ </div>
 </div>
 
 </body>

@@ -24,16 +24,13 @@ class PraticaController {
 
     def save = {PraticaCommand cmd ->
 
-        def praticaInstance = new Pratica()
+        def praticaInstance = new Pratica(params)
         if (cmd.fruitore == null) {
-            println '---------------sei qui---------- ' + cmd.fruitore
             flash.message = "Inserire un Fruitore valido"
             redirect(action: "create", params: params)
             return
         }
         praticaInstance.fruitore = cmd.fruitore
-
-
         if (praticaInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'pratica.label', default: 'Pratica'), praticaInstance.id])}"
             redirect(action: "show", id: praticaInstance.id)
@@ -113,13 +110,22 @@ class PraticaController {
 
     def result = {PraticaCommand cmd ->
 		log.info "cerca...."
-		println ('sei qui....')
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         def praticaInstanceList = Pratica.cercaPratiche(cmd, params)
         render(view: "list", model: [praticaInstanceList: praticaInstanceList, praticaInstanceTotal: praticaInstanceList.totalCount])
 
 
     }
+	
+	def resultContenzioso = {PraticaCommand cmd ->
+		log.info "cerca...."
+		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		def praticaInstanceList = Pratica.cercaPraticheContenzioso(cmd, params)
+		render(view: "listContenzioso", model: [praticaInstanceList: praticaInstanceList, praticaInstanceTotal: praticaInstanceList.totalCount])
+
+
+	}
+	
 
     def autocompleteSearch = {
         def listaFruitori = []
@@ -149,7 +155,7 @@ class PraticaController {
 
     def showDocumento = {
         DocumentObject docObj = DocumentObject.get(params.id)
-        println '------------------------------- ' + docObj.docName
+        
         response.setContentType("application/octet-stream")
         response.setHeader("Content-disposition", "attachment;filename=\"" + docObj.docName + "\"")
         response.outputStream << docObj.fileAllegatoByteArray
@@ -190,7 +196,7 @@ class PraticaController {
             flash.message = "${message(code: 'default.attach.message', args: [fileName])}"
             redirect(action: "show", id: praticaInstance.id)
         } else {
-            flash.message = "Non � stato possibile allegare il documento"
+            flash.message = "Non è stato possibile allegare il documento"
             redirect(action: "attachDocument", id: params.id)
         }
     }
@@ -205,6 +211,7 @@ class PraticaCommand {
     String nomecognome
     byte[] allegati
     Fruitore fruitore
+	String numeroPosizione
 
     static constraints = {
         numeroProtocollo(nullable: true)
@@ -214,6 +221,7 @@ class PraticaCommand {
         nomecognome(nullable: true)
         allegati(nullable: true)
         fruitore(blank: false)
+		numeroPosizione(nullable:true)
     }
 
 }

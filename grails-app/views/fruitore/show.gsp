@@ -8,14 +8,6 @@
 </head>
 
 <body>
-<div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a>
-    </span>
-    <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label"
-                                                                           args="[entityName]"/></g:link></span>
-    <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label"
-                                                                               args="[entityName]"/></g:link></span>
-</div>
 
 <div class="body">
     <h1><g:message code="default.show.label" args="[entityName]"/></h1>
@@ -26,12 +18,7 @@
         <table>
             <tbody>
 
-            <tr class="prop">
-                <td class="name"><g:message code="fruitore.id.label" default="Id"/></td>
-
-                <td class="value">${fieldValue(bean: fruitoreInstance, field: "id")}</td>
-
-            </tr>
+          
 
             <tr class="prop">
                 <td class="name"><g:message code="fruitore.nome.label" default="Nome"/></td>
@@ -74,6 +61,9 @@
                                                  value="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                                  onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
         </g:form>
+    </div>
+     <div class="navigation">
+        <g:link class="button_nav" action="list" ><g:message code="default.label.indietro" /></g:link>
     </div>
 </div>
 </body>

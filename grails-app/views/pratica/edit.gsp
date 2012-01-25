@@ -3,19 +3,18 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
+    <link rel="stylesheet" media="all" type="text/css"
+          href="${resource(dir: 'css/redmond', file: 'jquery-ui-1.8.13.custom.css')}"/>
+    <g:set var="entityName" value="${message(code: 'pratica.label', default: 'Pratica')}"/>
+    <g:javascript src="jQuery/jquery-1.5.1.min.js"/>
+    <g:javascript src="jQuery/jquery-ui-1.8.12.custom.min.js"/>
+    <g:jqDatepickerLocale lang="it"/>
     <g:set var="entityName" value="${message(code: 'pratica.label', default: 'Pratica')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
 </head>
 
 <body>
-<div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a>
-    </span>
-    <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label"
-                                                                           args="[entityName]"/></g:link></span>
-    <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label"
-                                                                               args="[entityName]"/></g:link></span>
-</div>
+
 
 <div class="body">
     <h1><g:message code="default.edit.label" args="[entityName]"/></h1>
@@ -48,21 +47,27 @@
                     <td class="name">
                         <label for="data"><g:message code="pratica.data.label" default="Data"/></label>
                     </td>
-                    <td class="value ${hasErrors(bean: praticaInstance, field: 'data', 'errors')}">
-                        <g:datePicker name="data" precision="day" value="${praticaInstance?.data}" default="none"
-                                      noSelection="['': '']"/>
-                    </td>
+                     <td class="value ${hasErrors(bean: praticaInstance, field: 'data', 'errors')}">
+                     	<g:jqDatepicker name="data" changeMonth="true" changeYear="true" value="${praticaInstance?.data}"/>
+                     </td>
                 </tr>
 
                 <tr class="prop">
                     <td class="name">
-                        <label for="descrizione"><g:message code="pratica.descrizione.label"
-                                                            default="Descrizione"/></label>
+                        <label for="descrizione"><g:message code="pratica.descrizione.label" default="Descrizione"/></label>
                     </td>
                     <td class="value ${hasErrors(bean: praticaInstance, field: 'descrizione', 'errors')}">
                         <g:textField name="descrizione" value="${praticaInstance?.descrizione}"/>
                     </td>
                 </tr>
+                <tr class="prop">
+                     <td class="name">
+                         <label for="descrizione"><g:message code="pratica.numeroPosizione.label" default="Numero Posizione" /></label>
+                     </td>
+                     <td class="value ${hasErrors(bean: praticaInstance, field: 'numeroPosizione', 'errors')}">
+                         <g:textField name="numeroPosizione" value="${praticaInstance?.numeroPosizione}"/>
+                     </td>
+                 </tr>
 
                 <tr class="prop">
                     <td class="name">
@@ -73,16 +78,7 @@
                     </td>
                 </tr>
 
-                <tr class="prop">
-                    <td class="name">
-                        <label for="allegati"><g:message code="pratica.allegati.label" default="Allegati"/></label>
-                    </td>
-                    <td class="value ${hasErrors(bean: praticaInstance, field: 'allegati', 'errors')}">
-                        <g:select name="allegati"
-                                  from="${it.solvingteam.doganellaGD.documentazione.DocumentObject.list()}"
-                                  multiple="yes" optionKey="id" size="5" value="${praticaInstance?.allegati*.id}"/>
-                    </td>
-                </tr>
+              
 
                 <tr class="prop">
                     <td class="name">
@@ -93,7 +89,23 @@
                                   optionKey="id" value="${praticaInstance?.fruitore?.id}" noSelection="['null': '']"/>
                     </td>
                 </tr>
-
+                
+                 <tr class="prop">
+                     <td valign="top" class="name">
+                         <label for="contenzioso"><g:message code="pratica.contenzioso.label" default="Contenzioso" /></label>
+                     </td>
+                     <td valign="top" class="value ${hasErrors(bean: praticaInstance, field: 'contenzioso', 'errors')}">
+                         <g:checkBox name="contenzioso" value="${praticaInstance?.contenzioso}" />
+                     </td>
+                 </tr>
+                
+				<tr class="prop">
+                      <td valign="top" class="name"><g:message code="pratica.allegati.label" default="Allegati" /></td>
+                      <td valign="top" style="text-align: left;" class="value">
+                      <g:link controller="pratica" action="attachDocument" params="[id:praticaInstance.id]">Documenti</g:link>
+                     </td>
+                 </tr>
+                 
                 </tbody>
             </table>
         </div>
@@ -106,6 +118,9 @@
                                                  onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
         </div>
     </g:form>
+    <div class="navigation">
+         <g:link class="button_nav" action="show" params="[id:praticaInstance.id]" ><g:message code="default.label.indietro" /></g:link>
+    </div>
 </div>
 </body>
 </html>

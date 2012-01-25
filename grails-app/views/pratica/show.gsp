@@ -8,14 +8,6 @@
 </head>
 
 <body>
-<div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a>
-    </span>
-    <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label"
-                                                                           args="[entityName]"/></g:link></span>
-    <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label"
-                                                                               args="[entityName]"/></g:link></span>
-</div>
 
 <div class="body">
     <h1><g:message code="default.show.label" args="[entityName]"/></h1>
@@ -60,15 +52,27 @@
                 <td class="value">${praticaInstance?.fruitore?.encodeAsHTML()}</td>
 
             </tr>
-
-            <tr class="prop">
-                <td class="name"><g:message code="pratica.allegati.label" default="Allegati"/></td>
-
-                <td style="text-align: left;" class="value">
-                    <g:link action="attachDocument" params="[id:praticaInstance.id]">Allega</g:link>
-                </td>
-            </tr>
-
+				<tr class="prop">
+                            <td valign="top" class="name"><g:message code="pratica.numeroPosisizione.label" default="Posizione" /></td>
+                            
+                            <td valign="top" class="value">${praticaInstance?.numeroPosizione}</td>
+                            
+                        </tr>
+            		<tr class="prop">
+                            <td valign="top" class="name"><g:message code="pratica.contenzioso.label" default="Contenzioso" /></td>
+                            
+                            <td valign="top" class="value"><g:formatBoolean boolean="${praticaInstance?.contenzioso}" /></td>
+                            
+                        </tr>
+             		<tr class="prop">
+                            <td valign="top" class="name"><g:message code="pratica.allegati.label" default="Allegati" /></td>
+                            
+                            <td valign="top" style="text-align: left;" class="value">
+                            <g:link controller="pratica" action="attachDocument" params="[id:praticaInstance.id]"><img src="${resource(dir:'images',file:'documenti.gif')}" alt="${message(code: 'default.label.table.documenti')}" border="0" title="${message(code: 'default.label.table.documenti')}" /></g:link>
+                               
+                            </td>
+                            
+                        </tr>
             </tbody>
         </table>
     </div>
@@ -76,12 +80,12 @@
     <div class="buttons">
         <g:form>
             <g:hiddenField name="id" value="${praticaInstance?.id}"/>
-            <span class="button"><g:actionSubmit class="edit" action="edit"
-                                                 value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
-            <span class="button"><g:actionSubmit class="delete" action="delete"
-                                                 value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
+            <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
+            <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
         </g:form>
+    </div>
+    <div class="navigation">
+            	<g:link class="button_nav" action="list" ><g:message code="default.label.indietro" /></g:link>
     </div>
 </div>
 </body>

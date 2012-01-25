@@ -7,7 +7,7 @@ class BootStrap {
     def init = { servletContext ->
 		log.info "ciaoo"
 		//prepareUserRole()
-		//setupDati()
+		setupDati()
     }
     def destroy = {
     }
@@ -52,7 +52,7 @@ class BootStrap {
 	private void setupDati(){
 		Date date = Date.parse("dd/MM/yyyy","25/11/2011")
 		
-		def pratica1 = new Pratica(numeroProtocollo:"numProto1",data:date,descrizione:"desc1",note:"note1").save(flush:true)
+		def pratica1 = new Pratica(numeroProtocollo:"numProto1",data:date,descrizione:"desc1",note:"note1",contenzioso:true).save(flush:true)
 		def pratica2 = new Pratica(numeroProtocollo:"numProto2",data:date,descrizione:"desc2",note:"note2").save(flush:true)
 		
 		def fruitore1 = new Fruitore(nome:"nome1",cognome:"cognome1",dataNascita:date,codice:"cod1").save(flush:true)
