@@ -17,6 +17,13 @@
     <div class="dialog">
         <table>
             <tbody>
+			
+			<tr class="prop">
+                <td class="name"><g:message code="pratica.stato.label" default="Stato"/></td>
+
+                <td class="value">${praticaInstance?.stato?.descrizione?.encodeAsHTML()}</td>
+
+            </tr>
 
             <tr class="prop">
                 <td class="name"><g:message code="pratica.numeroProtocollo.label" default="Numero Protocollo"/></td>
@@ -26,9 +33,16 @@
             </tr>
 
             <tr class="prop">
-                <td class="name"><g:message code="pratica.data.label" default="Data"/></td>
+                <td class="name"><g:message code="pratica.dataAcquisizione.label" default="Data Acquisizione"/></td>
 
-                <td class="value"><g:formatDate format="dd/MM/yyyy" date="${praticaInstance?.data}"/></td>
+                <td class="value"><g:formatDate format="dd/MM/yyyy" date="${praticaInstance?.dataAcquisizione}"/></td>
+
+            </tr>
+            
+             <tr class="prop">
+                <td class="name"><g:message code="pratica.dataAccettazione.label" default="Data Accettazione"/></td>
+
+                <td class="value"><g:formatDate format="dd/MM/yyyy" date="${praticaInstance?.dataAccettazione}"/></td>
 
             </tr>
 

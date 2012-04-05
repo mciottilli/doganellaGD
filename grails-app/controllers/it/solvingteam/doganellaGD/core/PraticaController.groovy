@@ -16,21 +16,37 @@ class PraticaController {
         [praticaInstanceList: Pratica.list(params), praticaInstanceTotal: Pratica.count()]
     }
 
-    def create = {
+	
+    def createChoose = {
         def praticaInstance = new Pratica()
         praticaInstance.properties = params
         return [praticaInstance: praticaInstance]
     }
+	
+	def create = {PraticaCommand cmd ->
+		def praticaInstance = new Pratica()
+		if (cmd.fruitore == null) {
+			flash.message = "Inserire un Fruitore valido"
+			redirect(action: "createChoose", params: params)
+			return
+		}
+		//def statoInstance = StatoPratica.findByDescrizione(cmd.statoPratica)
+		praticaInstance = new Pratica(stato:cmd.stato,fruitore:cmd.fruitore)
+		
+	
+		return [praticaInstance: praticaInstance]
+	}
 
     def save = {PraticaCommand cmd ->
-
         def praticaInstance = new Pratica(params)
-        if (cmd.fruitore == null) {
-            flash.message = "Inserire un Fruitore valido"
-            redirect(action: "create", params: params)
-            return
-        }
-        praticaInstance.fruitore = cmd.fruitore
+		
+       praticaInstance.fruitore = cmd.fruitore
+	   praticaInstance.stato = cmd.stato
+	   println 'data :'+praticaInstance.dataAcquisizione
+	   if(praticaInstance.stato.descrizione != StatoPratica.PREGRESSA){
+		//calcolo numero protocollo   
+		   
+	   }
         if (praticaInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'pratica.label', default: 'Pratica'), praticaInstance.id])}"
             redirect(action: "show", id: praticaInstance.id)
@@ -177,7 +193,7 @@ class PraticaController {
             }
         }
         else {
-            flash.message = "Non � stato possibile eliminare il documento"
+            flash.message = "Non è stato possibile eliminare il documento"
             redirect(action: "attachDocument", id: praticaInstance.id)
         }
     }
@@ -205,22 +221,24 @@ class PraticaController {
 class PraticaCommand {
 
     String numeroProtocollo
-    Date data
+    Date dataAccettazione
+	Date dataAcquisizione
     String descrizione
     String note
     String nomecognome
     byte[] allegati
     Fruitore fruitore
 	String numeroPosizione
+	StatoPratica stato
 
     static constraints = {
         numeroProtocollo(nullable: true)
-        data(nullable: true)
+        dataAccettazione(nullable: true)
+		dataAcquisizione(nullable: true)
         descrizione(nullable: true)
         note(nullable: true)
         nomecognome(nullable: true)
         allegati(nullable: true)
-        fruitore(blank: false)
 		numeroPosizione(nullable:true)
     }
 

@@ -1,5 +1,6 @@
 import it.solvingteam.doganellaGD.core.Fruitore;
 import it.solvingteam.doganellaGD.core.Pratica;
+import it.solvingteam.doganellaGD.core.StatoPratica;
 import it.solvingteam.doganellaGD.security.*;
 
 class BootStrap {
@@ -50,16 +51,21 @@ class BootStrap {
 	}
 	
 	private void setupDati(){
+		
+		def statoPratica1 = new StatoPratica(descrizione:"Pregressa").save(flush:true)
+		def statoPratica2 = new StatoPratica(descrizione:"Ingresso").save(flush:true)
+		def statoPratica3 = new StatoPratica(descrizione:"Uscita").save(flush:true)
 		Date date = Date.parse("dd/MM/yyyy","25/11/2011")
 		
-		def pratica1 = new Pratica(numeroProtocollo:"numProto1",data:date,descrizione:"desc1",note:"note1",contenzioso:true).save(flush:true)
-		def pratica2 = new Pratica(numeroProtocollo:"numProto2",data:date,descrizione:"desc2",note:"note2").save(flush:true)
 		
 		def fruitore1 = new Fruitore(nome:"nome1",cognome:"cognome1",dataNascita:date,codice:"cod1").save(flush:true)
 		def fruitore2 = new Fruitore(nome:"nome2",cognome:"cognome2",dataNascita:date,codice:"cod2").save(flush:true)
 		
-		pratica1.fruitore = fruitore1;
-		pratica2.fruitore = fruitore2		
+		def pratica1 = new Pratica(fruitore:fruitore1,numeroProtocollo:"numProto1",data:date,descrizione:"desc1",note:"note1",contenzioso:true,stato:statoPratica2).save(flush:true)
+		def pratica2 = new Pratica(fruitore:fruitore2,numeroProtocollo:"numProto2",data:date,descrizione:"desc2",note:"note2",stato:statoPratica1).save(flush:true)
+		
+		
+		
 				
 				
 				

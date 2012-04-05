@@ -54,11 +54,20 @@
 
                         <tr class="prop">
                             <td class="name">
-                                <label for="data"><g:message code="pratica.data.label" default="Data"/></label>
+                                <label for="dataAcquisizione"><g:message code="pratica.dataAcquisizione.label" default="Data Acquisizione"/></label>
                             </td>
-                            <td class="value ${hasErrors(bean: praticaInstance, field: 'data', 'errors')}">
+                            <td class="value ${hasErrors(bean: praticaInstance, field: 'dataAcquisizione', 'errors')}">
 
-                                <g:jqDatepicker name="data" changeMonth="true" changeYear="true"/>
+                                <g:jqDatepicker name="dataAcquisizione" changeMonth="true" changeYear="true"/>
+                            </td>
+                        </tr>
+                         <tr class="prop">
+                            <td class="name">
+                                <label for="dataAccettazione"><g:message code="pratica.dataAccettazione.label" default="Data Accettazione"/></label>
+                            </td>
+                            <td class="value ${hasErrors(bean: praticaInstance, field: 'dataAccettazione', 'errors')}">
+
+                                <g:jqDatepicker name="dataAccettazione" changeMonth="true" changeYear="true"/>
                             </td>
                         </tr>
 
@@ -97,7 +106,7 @@
                 <div class="buttons">
                     <span class="button"><g:actionSubmit class="save" action="result"
                                                          value="${message(code: 'default.button.search.label', default: 'Cerca')}"/></span>
-                    <span class="button"><g:actionSubmit class="save" action="create"
+                    <span class="button"><g:actionSubmit class="save" action="createChoose"
                                                          value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
                 </div>
             </g:form>
@@ -183,13 +192,22 @@
                             </td>
                         </tr>
 
-                        <tr class="prop">
+                         <tr class="prop">
                             <td class="name">
-                                <label for="data"><g:message code="pratica.data.label" default="Data"/></label>
+                                <label for="dataAcquisizione"><g:message code="pratica.dataAcquisizione.label" default="Data Acquisizione"/></label>
                             </td>
-                            <td class="value ${hasErrors(bean: praticaInstance, field: 'data', 'errors')}">
+                            <td class="value ${hasErrors(bean: praticaInstance, field: 'dataAcquisizione', 'errors')}">
 
-                                <g:jqDatepicker name="data" changeMonth="true" changeYear="true"/>
+                                <g:jqDatepicker name="dataAcquisizione" changeMonth="true" changeYear="true"/>
+                            </td>
+                        </tr>
+                         <tr class="prop">
+                            <td class="name">
+                                <label for="dataAccettazione"><g:message code="pratica.dataAccettazione.label" default="Data Accettazione"/></label>
+                            </td>
+                            <td class="value ${hasErrors(bean: praticaInstance, field: 'dataAccettazione', 'errors')}">
+
+                                <g:jqDatepicker name="dataAccettazione" changeMonth="true" changeYear="true"/>
                             </td>
                         </tr>
 

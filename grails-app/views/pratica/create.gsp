@@ -43,24 +43,57 @@
         <div class="dialog">
             <table>
                 <tbody>
-
+					
+			<tr class="prop">
+                    <td class="name">
+                        <label for="stato"><g:message code="pratica.stato.label" default="Stato"/></label>
+                    </td>
+                    <td class="value">
+                        ${praticaInstance?.stato?.descrizione}
+                        <g:hiddenField name="stato.id" value="${praticaInstance?.stato?.id}"/>
+                    </td>
+                </tr>
+   				<tr class="prop">
+                    <td class="name">
+                        <label for="fruitore"><g:message code="pratica.fruitore.label" default="Fruitore"/></label>
+                    </td>
+                    <td class="value">
+                        ${praticaInstance?.fruitore?.nome} ${praticaInstance?.fruitore?.cognome}
+                        <g:hiddenField name="fruitore" id="fruitore" value="${praticaInstance?.fruitore?.id}"/>
+                        
+                    </td>
+                </tr>
+                <g:if test="${praticaInstance.stato?.descrizione == it.solvingteam.doganellaGD.core.StatoPratica.PREGRESSA}">
                 <tr class="prop">
                     <td class="name">
                         <label for="numeroProtocollo"><g:message code="pratica.numeroProtocollo.label" default="Numero Protocollo"/></label>
                     </td>
                     <td class="value ${hasErrors(bean: praticaInstance, field: 'numeroProtocollo', 'errors')}">
+                    <g:if test="${praticaInstance.stato?.descrizione == it.solvingteam.doganellaGD.core.StatoPratica.PREGRESSA}">
                         <g:textField name="numeroProtocollo" value="${praticaInstance?.numeroProtocollo}"/>
+                    </g:if>
+                   
                     </td>
                 </tr>
-
+				</g:if>
                 <tr class="prop">
-                    <td class="name">
-                        <label for="data"><g:message code="pratica.data.label" default="Data"/></label>
-                    </td>
-                    <td class="value ${hasErrors(bean: praticaInstance, field: 'data', 'errors')}">
-                        <g:jqDatepicker name="data" changeMonth="true" changeYear="true"/>
-                    </td>
-                </tr>
+                            <td class="name">
+                                <label for="dataAcquisizione"><g:message code="pratica.dataAcquisizione.label" default="Data Acquisizione"/></label>
+                            </td>
+                            <td class="value ${hasErrors(bean: praticaInstance, field: 'dataAcquisizione', 'errors')}">
+
+                                <g:jqDatepicker name="dataAcquisizione" changeMonth="true" changeYear="true"/>
+                            </td>
+                        </tr>
+                         <tr class="prop">
+                            <td class="name">
+                                <label for="dataAccettazione"><g:message code="pratica.dataAccettazione.label" default="Data Accettazione"/></label>
+                            </td>
+                            <td class="value ${hasErrors(bean: praticaInstance, field: 'dataAccettazione', 'errors')}">
+
+                                <g:jqDatepicker name="dataAccettazione" changeMonth="true" changeYear="true"/>
+                            </td>
+                        </tr>
 
                 <tr class="prop">
                     <td class="name">
@@ -88,15 +121,7 @@
                     </td>
                 </tr>
 				
-                <tr class="prop">
-                    <td class="name">
-                        <label for="fruitore"><g:message code="pratica.fruitore.label" default="Fruitore"/><small>(nome o cognome)</small></label>
-                    </td>
-                    <td class="value ${hasErrors(bean: praticaInstance, field: 'fruitore', 'errors')}">
-                        <g:hiddenField name="fruitore" id="fruitore"/>
-                        <g:textField name="fruitoreid" id="fruitoreid"/>
-                    </td>
-                </tr>
+             
                 <tr class="prop">
                      <td valign="top" class="name">
                          <label for="contenzioso"><g:message code="pratica.contenzioso.label" default="Contenzioso" /></label>

@@ -6,23 +6,29 @@ class Pratica {
 
     String numeroProtocollo
     Date data
+	Date dataAcquisizione
+	Date dataAccettazione
     String descrizione
     String note
 	boolean contenzioso
 	String numeroPosizione
+	StatoPratica stato
 
     static hasMany = [allegati: DocumentObject]
 
     Fruitore fruitore
 
     static constraints = {
-        numeroProtocollo(nullable: true)
+        numeroProtocollo(nullable: true,unique:true)
         data(nullable: true)
+		dataAcquisizione(nullable: true)
+		dataAccettazione(nullable: true)
         descrizione(nullable: true)
         note(nullable: true)
         allegati(nullable: true)
         fruitore(nullable: true)
 		numeroPosizione(nullable:true)
+		stato(nullable:true)
     }
 
     def static cercaPratiche(cmd, params) {
@@ -37,9 +43,12 @@ class Pratica {
             if (cmd.descrizione) {
                 ilike 'descrizione', "%${cmd.descrizione}%"
             }
-            if (cmd.data) {
-                eq 'data', cmd.data
+            if (cmd.dataAcquisizione) {
+                eq 'dataAcquisizione', cmd.dataAcquisizione
             }
+			if (cmd.dataAccettazione) {
+				eq 'dataAccettazione', cmd.dataAccettazione
+			}
 			if (cmd.numeroPosizione) {
 				ilike 'numeroPosizione', "%${cmd.numeroPosizione}%"
 			}
@@ -68,8 +77,11 @@ class Pratica {
 			if (cmd.descrizione) {
 				ilike 'descrizione', "%${cmd.descrizione}%"
 			}
-			if (cmd.data) {
-				eq 'data', cmd.data
+			 if (cmd.dataAcquisizione) {
+                eq 'dataAcquisizione', cmd.dataAcquisizione
+            }
+			if (cmd.dataAccettazione) {
+				eq 'dataAccettazione', cmd.dataAccettazione
 			}
 			if (cmd.numeroPosizione) {
 				ilike 'numeroPosizione', "%${cmd.numeroPosizione}%"

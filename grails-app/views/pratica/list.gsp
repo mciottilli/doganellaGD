@@ -39,7 +39,9 @@
                 <g:sortableColumn property="numeroProtocollo"
                                   title="${message(code: 'pratica.numeroProtocollo.label', default: 'Numero Protocollo')}"/>
 
-                <g:sortableColumn property="data" title="${message(code: 'pratica.data.label', default: 'Data')}"/>
+                <g:sortableColumn property="dataAcquisizione" title="${message(code: 'pratica.dataAcquisizione.label', default: 'Data Acquisizione')}"/>
+                
+                <g:sortableColumn property="dataAccettazione" title="${message(code: 'pratica.dataAccettazione.label', default: 'Data Accettazione')}"/>
 
                 <g:sortableColumn property="descrizione"
                                   title="${message(code: 'pratica.descrizione.label', default: 'Descrizione')}"/>
@@ -58,7 +60,9 @@
 
                     <td>${fieldValue(bean: praticaInstance, field: "numeroProtocollo")}</td>
 
-                    <td><g:formatDate format="dd/MM/yyyy" date="${praticaInstance.data}"/></td>
+                    <td><g:formatDate format="dd/MM/yyyy" date="${praticaInstance.dataAcquisizione}"/></td>
+                    
+                    <td><g:formatDate format="dd/MM/yyyy" date="${praticaInstance.dataAccettazione}"/></td>
 
                     <td>${fieldValue(bean: praticaInstance, field: "descrizione")}</td>
 
@@ -75,7 +79,7 @@
 	    </div>
 	    <g:form>
 	      <div class="buttons">
-             <span class="button"><g:actionSubmit class="save" action="create" value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
+             <span class="button"><g:actionSubmit class="save" action="createChoose" value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
           </div>
             
     	</g:form>
@@ -163,11 +167,21 @@
 
                         <tr class="prop">
                             <td class="name">
-                                <label for="data"><g:message code="pratica.data.label" default="Data"/></label>
+                                <label for="data"><g:message code="pratica.dataAcquisizione.label" default="Data Acquisizione "/></label>
                             </td>
-                            <td class="value ${hasErrors(bean: praticaInstance, field: 'data', 'errors')}">
+                            <td class="value ${hasErrors(bean: praticaInstance, field: 'dataAcquisizione', 'errors')}">
 
-                                <g:jqDatepicker name="data" changeMonth="true" changeYear="true"/>
+                                <g:jqDatepicker name="dataAcquisizione" changeMonth="true" changeYear="true"/>
+                            </td>
+                        </tr>
+                        
+                         <tr class="prop">
+                            <td class="name">
+                                <label for="data"><g:message code="pratica.dataAccettazione.label" default="Data Accettazione "/></label>
+                            </td>
+                            <td class="value ${hasErrors(bean: praticaInstance, field: 'dataAccettazione', 'errors')}">
+
+                                <g:jqDatepicker name="Accettazione" changeMonth="true" changeYear="true"/>
                             </td>
                         </tr>
 
