@@ -22,5 +22,9 @@ class MyUtility {
 		
 	}
 	
+	static String getYearFormDate(Date data) {
+		data.year + 1900
+	}
+	
 	
 }
