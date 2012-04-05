@@ -1,11 +1,11 @@
 package it.solvingteam.doganellaGD.core
 
 import it.solvingteam.doganellaGD.documentazione.DocumentObject
+import it.solvingteam.doganellaGD.util.MyUtility;
 
 class Pratica {
 
     String numeroProtocollo
-    Date data
 	Date dataAcquisizione
 	Date dataAccettazione
     String descrizione
@@ -20,8 +20,7 @@ class Pratica {
 
     static constraints = {
         numeroProtocollo(nullable: true,unique:true)
-        data(nullable: true)
-		dataAcquisizione(nullable: true)
+		dataAcquisizione(nullable: false)
 		dataAccettazione(nullable: true)
         descrizione(nullable: true)
         note(nullable: true)
@@ -95,14 +94,31 @@ class Pratica {
 
 				}
 
-
 			}
 			eq 'contenzioso' , true
 
 		}
 	}
 	
+	public static int maxNumProtocolloPerAnno(String anno){
+		def annoInt = Integer.parseInt(anno);
+		def c = Calendar.getInstance()
+		c.set(annoInt, Calendar.JANUARY, 1)
+		def inizioAnno = c.time
+		c.add(Calendar.YEAR, 1)
+		def fineAnno = c.time - 1
+		def results = Pratica.createCriteria().list(){
+		between 'dataAcquisizione', inizioAnno, fineAnno
+		createAlias("stato","st")
+		or{
+				eq 'st.descrizione' ,StatoPratica.INGRESSO
+				eq 'st.descrizione' ,StatoPratica.USCITA
+			}
+		isNotNull 'numeroProtocollo'
+		}
+		MyUtility.getNumeroMaxProtocollo(results)	
+	}
 	
-	
+			
 	
 }

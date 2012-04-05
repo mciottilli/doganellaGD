@@ -55,14 +55,15 @@ class BootStrap {
 		def statoPratica1 = new StatoPratica(descrizione:"Pregressa").save(flush:true)
 		def statoPratica2 = new StatoPratica(descrizione:"Ingresso").save(flush:true)
 		def statoPratica3 = new StatoPratica(descrizione:"Uscita").save(flush:true)
-		Date date = Date.parse("dd/MM/yyyy","25/11/2011")
+		Date date = Date.parse("dd/MM/yyyy","05/04/2012")
+		Date date2 = Date.parse("dd/MM/yyyy","05/03/2012")
 		
 		
 		def fruitore1 = new Fruitore(nome:"nome1",cognome:"cognome1",dataNascita:date,codice:"cod1").save(flush:true)
 		def fruitore2 = new Fruitore(nome:"nome2",cognome:"cognome2",dataNascita:date,codice:"cod2").save(flush:true)
 		
-		def pratica1 = new Pratica(fruitore:fruitore1,numeroProtocollo:"numProto1",data:date,descrizione:"desc1",note:"note1",contenzioso:true,stato:statoPratica2).save(flush:true)
-		def pratica2 = new Pratica(fruitore:fruitore2,numeroProtocollo:"numProto2",data:date,descrizione:"desc2",note:"note2",stato:statoPratica1).save(flush:true)
+		def pratica1 = new Pratica(fruitore:fruitore1,dataAcquisizione:date,descrizione:"desc1",note:"note1",contenzioso:true,stato:statoPratica2,numeroProtocollo:"DOGI20120000002").save(flush:true)
+		def pratica2 = new Pratica(fruitore:fruitore2,dataAcquisizione:date2,descrizione:"desc2",note:"note2",stato:statoPratica2,numeroProtocollo:"DOGI20120000001").save(flush:true)
 		
 		
 		

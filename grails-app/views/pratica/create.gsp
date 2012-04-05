@@ -9,21 +9,9 @@
     <g:javascript src="jQuery/jquery-1.5.1.min.js"/>
     <g:javascript src="jQuery/jquery-ui-1.8.12.custom.min.js"/>
     <g:jqDatepickerLocale lang="it"/>
-    <g:javascript src="jQuery/jquery.ui.autocomplete.js"/>
+   
     <title><g:message code="default.create.label" args="[entityName]"/></title>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#fruitoreid').autocomplete({
-                source: "${createLink(action: 'autocompleteSearch')}",
-                select: function(event, ui) {
-
-                    $("#fruitore").val(ui.item.id);
-
-                }
-            });
-
-        });
-    </script>
+   
 </head>
 
 <body>
@@ -39,7 +27,13 @@
             <g:renderErrors bean="${praticaInstance}" as="list"/>
         </div>
     </g:hasErrors>
-    <g:form action="save" enctype="multipart/form-data">
+     <g:hasErrors bean="${cmd}">
+     bello
+            <div class="errors">
+                <g:renderErrors bean="${cmd}" as="list" />
+            </div>
+            </g:hasErrors>
+    <g:form action="save">
         <div class="dialog">
             <table>
                 <tbody>

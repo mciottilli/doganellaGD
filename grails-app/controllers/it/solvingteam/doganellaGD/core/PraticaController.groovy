@@ -2,6 +2,7 @@ package it.solvingteam.doganellaGD.core
 
 import grails.converters.JSON
 import it.solvingteam.doganellaGD.documentazione.DocumentObject
+import it.solvingteam.doganellaGD.util.MyUtility;
 
 class PraticaController {
 
@@ -24,7 +25,7 @@ class PraticaController {
     }
 	
 	def create = {PraticaCommand cmd ->
-		def praticaInstance = new Pratica()
+		def praticaInstance
 		if (cmd.fruitore == null) {
 			flash.message = "Inserire un Fruitore valido"
 			redirect(action: "createChoose", params: params)
@@ -38,16 +39,26 @@ class PraticaController {
 	}
 
     def save = {PraticaCommand cmd ->
-        def praticaInstance = new Pratica(params)
+		def praticaInstance = new Pratica(params)
+		praticaInstance.fruitore = cmd.fruitore
+		praticaInstance.stato = cmd.stato
 		
-       praticaInstance.fruitore = cmd.fruitore
-	   praticaInstance.stato = cmd.stato
-	   println 'data :'+praticaInstance.dataAcquisizione
+		if(!cmd.validate()){
+			render(view: "create", model: [cmd: cmd,praticaInstance: praticaInstance])
+			return
+		}
+	   
 	   if(praticaInstance.stato.descrizione != StatoPratica.PREGRESSA){
-		//calcolo numero protocollo   
+		//calcolo numero protocollo
+		       
+		    def numeroProtocollo = Pratica.maxNumProtocolloPerAnno(MyUtility.getYearFormDate(praticaInstance.dataAcquisizione))
+			
+		   
+		   praticaInstance.numeroProtocollo = MyUtility.calcolaNumeroProtocollo(numeroProtocollo, praticaInstance);
 		   
 	   }
         if (praticaInstance.save(flush: true)) {
+			
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'pratica.label', default: 'Pratica'), praticaInstance.id])}"
             redirect(action: "show", id: praticaInstance.id)
         }
@@ -234,7 +245,7 @@ class PraticaCommand {
     static constraints = {
         numeroProtocollo(nullable: true)
         dataAccettazione(nullable: true)
-		dataAcquisizione(nullable: true)
+		dataAcquisizione(nullable:false)
         descrizione(nullable: true)
         note(nullable: true)
         nomecognome(nullable: true)
