@@ -151,7 +151,11 @@ div.errors li {
     line-height: 16px;
     padding-left: 30px;
 }
-
+label.error{
+	
+	color: #cc0000;
+	margin:5px;
+}
 td.errors select {
     border: 1px solid red;
 }

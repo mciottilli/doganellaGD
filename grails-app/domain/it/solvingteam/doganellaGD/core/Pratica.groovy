@@ -35,7 +35,6 @@ class Pratica {
 
         def results = c.list(params) {
 
-
             if (cmd.numeroProtocollo) {
                 ilike 'numeroProtocollo', "%${cmd.numeroProtocollo}%"
             }
@@ -56,13 +55,16 @@ class Pratica {
                     or {
                         ilike 'nome', "%${cmd.nomecognome}"
                         ilike 'cognome', "%${cmd.nomecognome}"
+						ilike 'codice', "%${cmd.nomecognome}"
                     }
 
                 }
 
-
             }
 
+			if(cmd.stato){
+				eq 'stato' , cmd.stato
+			}
         }
     }
 	
@@ -90,10 +92,14 @@ class Pratica {
 					or {
 						ilike 'nome', "%${cmd.nomecognome}"
 						ilike 'cognome', "%${cmd.nomecognome}"
+						ilike 'codice', "%${cmd.nomecognome}"
 					}
 
 				}
 
+			}
+			if(cmd.stato){
+				eq 'stato' , cmd.stato
 			}
 			eq 'contenzioso' , true
 

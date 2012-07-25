@@ -21,9 +21,9 @@
 <h1>Home</h1>
     <div id="tabs">
         <ul>
-            <li><a href="#tabs-cerca">Cerca</a></li>
-            <li><a href="#tabs-fruitori">Gestione Fruitori</a></li>
-            <li><a href="#tabs-contenziosi">Gestione Contenziosi</a></li>
+            <li><a href="#tabs-cerca"><g:message code="tabs.gestione.pratiche"/></a></li>
+            <li><a href="#tabs-fruitori"><g:message code="tabs.gestione.fruitori"/></a></li>
+            <li><a href="#tabs-contenziosi"><g:message code="tabs.gestione.contenziosi"/></a></li>
         </ul>
 
 
@@ -41,6 +41,17 @@
                 <div class="dialog">
                     <table>
                         <tbody>
+
+				<tr class="prop">
+                    <td class="name">
+                        <label for="stato.id"><g:message code="pratica.stato.label" default="Stato"/></label>
+                    </td>
+                    <td class="value ${hasErrors(bean: praticaInstance, field: 'stato', 'errors')}">
+                        <g:radioGroup values="${it.solvingteam.doganellaGD.core.StatoPratica.list()*.id}" name="stato.id" labels="['Pregressa','Ingresso','Uscita']" >
+                        ${it.radio} ${it.label}
+                        </g:radioGroup>
+                    </td>
+                </tr>
 
                         <tr class="prop">
                             <td class="name">
@@ -91,8 +102,7 @@
 
                         <tr class="prop">
                             <td class="name">
-                                <label for="fruitore"><g:message code="pratica.fruitore.label"
-                                                                 default="Nome Cognome"/></label>
+                                <label for="fruitore"><g:message code="pratica.fruitore.label" default="Nome Cognome Codice" /></label>
                             </td>
                             <td class="value ${hasErrors(bean: praticaInstance, field: 'fruitore', 'errors')}">
                                 <g:textField name="nomecognome"/>
@@ -177,11 +187,20 @@
                 </div>
             </g:hasErrors>
             <g:form method="post" controller="pratica">
-
+			
                 <div class="dialog">
                     <table>
                         <tbody>
-
+				<tr class="prop">
+                    <td class="name">
+                        <label for="stato.id"><g:message code="pratica.stato.label" default="Stato"/></label>
+                    </td>
+                    <td class="value ${hasErrors(bean: praticaInstance, field: 'stato', 'errors')}">
+                        <g:radioGroup values="${it.solvingteam.doganellaGD.core.StatoPratica.list()*.id}" name="stato.id" labels="['Pregressa','Ingresso','Uscita']" >
+                        ${it.radio} ${it.label}
+                        </g:radioGroup>
+                    </td>
+                </tr>
                         <tr class="prop">
                             <td class="name">
                                 <label for="numeroProtocollo"><g:message code="pratica.numeroProtocollo.label"
@@ -230,8 +249,7 @@
                         </tr>
                         <tr class="prop">
                             <td class="name">
-                                <label for="fruitore"><g:message code="pratica.fruitore.label"
-                                                                 default="Nome Cognome"/></label>
+                                <label for="fruitore"><g:message code="pratica.fruitore.label" default="Nome Cognome Codice" /></label>
                             </td>
                             <td class="value ${hasErrors(bean: praticaInstance, field: 'fruitore', 'errors')}">
                                 <g:textField name="nomecognome"/>

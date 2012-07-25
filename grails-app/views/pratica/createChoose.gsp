@@ -3,26 +3,37 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
-    <link rel="stylesheet" media="all" type="text/css"
-          href="${resource(dir: 'css/redmond', file: 'jquery-ui-1.8.13.custom.css')}"/>
+    <link rel="stylesheet" media="all" type="text/css" href="${resource(dir: 'css/redmond', file: 'jquery-ui-1.8.13.custom.css')}"/>
     <g:set var="entityName" value="${message(code: 'pratica.label', default: 'Pratica')}"/>
     <g:javascript src="jQuery/jquery-1.5.1.min.js"/>
     <g:javascript src="jQuery/jquery-ui-1.8.12.custom.min.js"/>
-    <g:jqDatepickerLocale lang="it"/>
+   <g:jqDatepickerLocale lang="it"/>
     <g:javascript src="jQuery/jquery.ui.autocomplete.js"/>
+    <g:javascript library="jQuery/jquery.validate" />
     <title><g:message code="default.create.label" args="[entityName]"/></title>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('#fruitoreid').autocomplete({
-                source: "${createLink(action: 'autocompleteSearch')}",
-                select: function(event, ui) {
-
-                    $("#fruitore").val(ui.item.id);
-
-                }
-            });
-
+    $(document).ready(function() {
+        $('#fruitoreid').autocomplete({
+            source: "${createLink(action: 'autocompleteSearch')}",
+            select: function(event, ui) {
+                $("#fruitore").val(ui.item.id);
+            }
         });
+
+    });
+ 
+  	  $(document).ready(function(){
+  		  var validator = $("#create1").validate({
+  	  		
+  				rules: {
+  			  		 fruitoreid: "required"
+  				},
+  				messages: {
+  					fruitoreid: "Campo Obbligatorio"
+  					
+  				}
+  		  });
+  	  });
     </script>
 </head>
 
@@ -34,12 +45,8 @@
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
-    <g:hasErrors bean="${praticaInstance}">
-        <div class="errors">
-            <g:renderErrors bean="${praticaInstance}" as="list"/>
-        </div>
-    </g:hasErrors>
-    <g:form action="create" >
+   
+    <g:form action="create" name="create1">
         <div class="dialog">
             <table>
                 <tbody>
@@ -55,10 +62,6 @@
                     </td>
                 </tr>
 
-              
-
-                
-				
                 <tr class="prop">
                     <td class="name">
                         <label for="fruitore"><g:message code="pratica.fruitore.label" default="Fruitore"/><small>(nome o cognome)</small></label>
@@ -69,11 +72,9 @@
                     </td>
                 </tr>
                
- 					
                 </tbody>
             </table>
         </div>
-
         <div class="buttons">
             <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.confirm.label', default: 'Conferma')}"/></span>
         </div>

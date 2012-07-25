@@ -8,9 +8,23 @@
     <g:set var="entityName" value="${message(code: 'pratica.label', default: 'Pratica')}"/>
     <g:javascript src="jQuery/jquery-1.5.1.min.js"/>
     <g:javascript src="jQuery/jquery-ui-1.8.12.custom.min.js"/>
-    <g:jqDatepickerLocale lang="it"/>
+    <g:javascript library="jQuery/jquery.validate" />
     <g:set var="entityName" value="${message(code: 'pratica.label', default: 'Pratica')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
+    <script type="text/javascript">
+  	  $(document).ready(function(){
+  		  var validator = $("#edit").validate({
+  	  		
+  				rules: {
+  					dataAcquisizione: "required"
+  				},
+  				messages: {
+  					dataAcquisizione: "Campo Obbligatorio"
+  					
+  				}
+  		  });
+  	  });
+    </script>
 </head>
 
 <body>
@@ -26,20 +40,35 @@
             <g:renderErrors bean="${praticaInstance}" as="list"/>
         </div>
     </g:hasErrors>
-    <g:form method="post">
+    <g:form method="post" name="edit">
         <g:hiddenField name="id" value="${praticaInstance?.id}"/>
         <g:hiddenField name="version" value="${praticaInstance?.version}"/>
         <div class="dialog">
             <table>
                 <tbody>
+			<tr class="prop">
+                    <td class="name">
+                        <label for="stato"><g:message code="pratica.stato.label" default="Stato"/></label>
+                    </td>
+                    <td class="value">
+                        ${praticaInstance?.stato?.descrizione}
+                        
+                    </td>
+                </tr>
 
                 <tr class="prop">
                     <td class="name">
-                        <label for="numeroProtocollo"><g:message code="pratica.numeroProtocollo.label"
-                                                                 default="Numero Protocollo"/></label>
+                        <label for="numeroProtocollo"><g:message code="pratica.numeroProtocollo.label" default="Numero Protocollo"/></label>
                     </td>
                     <td class="value ${hasErrors(bean: praticaInstance, field: 'numeroProtocollo', 'errors')}">
-                        <g:textField name="numeroProtocollo" value="${praticaInstance?.numeroProtocollo}"/>
+                        
+                        <g:if test="${praticaInstance?.stato?.descrizione == it.solvingteam.doganellaGD.core.StatoPratica.PREGRESSA}">
+                        	<g:textField name="numeroProtocollo" value="${praticaInstance?.numeroProtocollo}"/>
+                        </g:if>
+                        <g:else>
+                        	${praticaInstance?.numeroProtocollo}
+                        </g:else>
+                        
                     </td>
                 </tr>
 
@@ -49,7 +78,7 @@
                         </td>
                         <td class="value ${hasErrors(bean: praticaInstance, field: 'dataAcquisizione', 'errors')}">
 
-                            <g:jqDatepicker name="dataAcquisizione" changeMonth="true" changeYear="true"/>
+                            <g:jqDatepicker name="dataAcquisizione" changeMonth="true" changeYear="true" value="${praticaInstance.dataAcquisizione}"/>
                         </td>
                     </tr>
                     
@@ -59,7 +88,7 @@
                         </td>
                         <td class="value ${hasErrors(bean: praticaInstance, field: 'dataAccettazione', 'errors')}">
 
-                            <g:jqDatepicker name="Accettazione" changeMonth="true" changeYear="true"/>
+                            <g:jqDatepicker name="Accettazione" changeMonth="true" changeYear="true" value="${praticaInstance.dataAccettazione}"/>
                         </td>
                     </tr>
 
@@ -113,7 +142,7 @@
 				<tr class="prop">
                       <td valign="top" class="name"><g:message code="pratica.allegati.label" default="Allegati" /></td>
                       <td valign="top" style="text-align: left;" class="value">
-                      <g:link controller="pratica" action="attachDocument" params="[id:praticaInstance.id]">Documenti</g:link>
+                      <g:link controller="pratica" action="attachDocument" params="[id:praticaInstance.id]"><img src="${resource(dir:'images',file:'documenti.gif')}" alt="${message(code: 'default.label.table.documenti')}" border="0" title="${message(code: 'default.label.table.documenti')}" /></g:link>
                      </td>
                  </tr>
                  

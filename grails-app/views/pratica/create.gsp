@@ -8,10 +8,25 @@
     <g:set var="entityName" value="${message(code: 'pratica.label', default: 'Pratica')}"/>
     <g:javascript src="jQuery/jquery-1.5.1.min.js"/>
     <g:javascript src="jQuery/jquery-ui-1.8.12.custom.min.js"/>
-    <g:jqDatepickerLocale lang="it"/>
+      
+   <g:javascript library="jQuery/jquery.validate" />
    
     <title><g:message code="default.create.label" args="[entityName]"/></title>
-   
+   <script type="text/javascript">
+ 
+  	  $(document).ready(function(){
+  		  var validator = $("#create2").validate({
+  	  		
+  				rules: {
+  					dataAcquisizione: "required"
+  				},
+  				messages: {
+  					dataAcquisizione: "Campo Obbligatorio"
+  					
+  				}
+  		  });
+  	  });
+    </script>
 </head>
 
 <body>
@@ -28,12 +43,11 @@
         </div>
     </g:hasErrors>
      <g:hasErrors bean="${cmd}">
-     bello
             <div class="errors">
                 <g:renderErrors bean="${cmd}" as="list" />
             </div>
             </g:hasErrors>
-    <g:form action="save">
+    <g:form action="save" name="create2">
         <div class="dialog">
             <table>
                 <tbody>
@@ -52,7 +66,7 @@
                         <label for="fruitore"><g:message code="pratica.fruitore.label" default="Fruitore"/></label>
                     </td>
                     <td class="value">
-                        ${praticaInstance?.fruitore?.nome} ${praticaInstance?.fruitore?.cognome}
+                        ${praticaInstance?.fruitore?.codice} ${praticaInstance?.fruitore?.nome} ${praticaInstance?.fruitore?.cognome}
                         <g:hiddenField name="fruitore" id="fruitore" value="${praticaInstance?.fruitore?.id}"/>
                         
                     </td>
@@ -63,7 +77,7 @@
                         <label for="numeroProtocollo"><g:message code="pratica.numeroProtocollo.label" default="Numero Protocollo"/></label>
                     </td>
                     <td class="value ${hasErrors(bean: praticaInstance, field: 'numeroProtocollo', 'errors')}">
-                    <g:if test="${praticaInstance.stato?.descrizione == it.solvingteam.doganellaGD.core.StatoPratica.PREGRESSA}">
+                    <g:if test="${praticaInstance?.stato?.descrizione == it.solvingteam.doganellaGD.core.StatoPratica.PREGRESSA}">
                         <g:textField name="numeroProtocollo" value="${praticaInstance?.numeroProtocollo}"/>
                     </g:if>
                    
@@ -134,7 +148,7 @@
         </div>
     </g:form>
      <div class="navigation">
-        <g:link class="button_nav" action="list" ><g:message code="default.label.indietro" /></g:link>
+        <g:link class="button_nav" action="createChoose" ><g:message code="default.label.indietro" /></g:link>
     </div>
 </div>
 </body>

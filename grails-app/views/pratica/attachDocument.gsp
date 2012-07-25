@@ -4,7 +4,26 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'pratica.label', default: 'Documenti')}"/>
+    
+     <g:javascript src="jQuery/jquery-1.5.1.min.js"/>
+    <g:javascript src="jQuery/jquery-ui-1.8.12.custom.min.js"/>
+   <g:javascript library="jQuery/jquery.validate" />
     <title><g:message code="default.show.label" args="[entityName]"/></title>
+    <script type="text/javascript">
+ 
+  	  $(document).ready(function(){
+  		  var validator = $("#attach").validate({
+  	  		
+  				rules: {
+  					allegati: "required"
+  				},
+  				messages: {
+  					allegati: "Campo Obbligatorio"
+  					
+  				}
+  		  });
+  	  });
+    </script>
 </head>
 
 <body>
@@ -39,7 +58,7 @@
     </fieldset>
 </g:if>
     <fieldset>
-        <g:uploadForm>
+        <g:uploadForm name="attach">
 
             <table>
                 <tbody>

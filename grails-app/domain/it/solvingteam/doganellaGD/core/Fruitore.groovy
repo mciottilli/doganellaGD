@@ -15,7 +15,7 @@ class Fruitore {
 
     @Override
     public String toString() {
-        return nome + " " + cognome
+        return codice + " " + nome + " " + cognome
     }
 
     def static cercaFruitore(cmd, params) {

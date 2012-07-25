@@ -14,7 +14,7 @@
 * Definizione di un file di configurazione esterno
 */
 grails.config.locations = []
-def ENV_NAME = "DDD"
+def ENV_NAME = "DOGANELLA_PATH"
 println "--------------------------------------------------------"
 // 1: A command line option should override everything.
 // Test by running:

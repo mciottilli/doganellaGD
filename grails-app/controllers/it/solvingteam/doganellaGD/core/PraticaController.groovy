@@ -25,14 +25,14 @@ class PraticaController {
     }
 	
 	def create = {PraticaCommand cmd ->
-		def praticaInstance
+		
 		if (cmd.fruitore == null) {
 			flash.message = "Inserire un Fruitore valido"
 			redirect(action: "createChoose", params: params)
 			return
 		}
 		//def statoInstance = StatoPratica.findByDescrizione(cmd.statoPratica)
-		praticaInstance = new Pratica(stato:cmd.stato,fruitore:cmd.fruitore)
+		def praticaInstance = new Pratica(stato:cmd.stato,fruitore:cmd.fruitore)
 		
 	
 		return [praticaInstance: praticaInstance]
@@ -160,11 +160,12 @@ class PraticaController {
             or {
                 ilike 'nome', params.term + '%'
                 ilike 'cognome', params.term + '%'
+				ilike 'codice', params.term + '%'
             }
         }.each {r ->
             def mapFruitori = [:]
             mapFruitori.put("id", r.id)
-            mapFruitori.put("label", r.nome + " " + r.cognome)
+            mapFruitori.put("label", r.codice + ": "+r.nome + " " +r.cognome)
             listaFruitori << mapFruitori
 
         }
