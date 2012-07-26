@@ -11,10 +11,15 @@
 <body>
 
 <div id="headerLogo"><img src="${resource(dir: 'images', file: 'logoDoganella.png')}" alt="Doganella" border="0"/></div>
-<div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
-    <span class="menuButton"><a class="logout" href="${createLink(uri: '/')}"><g:message code="default.logout.label"/></a></span>
-    </div>
+ <div>
+   <ul class="menu">
+	<li class="top"><g:link action="searchPratiche" controller="pratica" class="top_link"><span>Pratiche</span></g:link></li>
+	<li class="top"><g:link action="search" controller="fruitore" class="top_link"><span>Fruitori</span></g:link></li>
+	<li class="top"><g:link action="searchContenziosi" controller="pratica" class="top_link"><span>Contenziosi</span></g:link></li>
+	<li class="top"><g:link  controller="utente" class="top_link"><span>Utenti</span></g:link></li>
+	<li class="top"><g:link controller="logout" class="top_link"><span><g:message code="default.logout.label"/></span></g:link></li>
+   </ul>
+</div>		
 
 <g:layoutBody/>
 </body>

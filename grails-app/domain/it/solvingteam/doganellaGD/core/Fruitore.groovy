@@ -8,9 +8,9 @@ class Fruitore {
     String codice
 
     static constraints = {
-        nome(nullable: true)
-        cognome(nullable: true)
-        dataNascita(nullable: true)
+        nome(nullable: false)
+        cognome(nullable: false)
+        dataNascita(nullable: false)
     }
 
     @Override

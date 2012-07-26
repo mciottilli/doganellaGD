@@ -4,6 +4,10 @@ class FruitoreController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+	def search = {
+		session.removeAttribute("commandFruitori")
+	}
+	
     def index = {
         redirect(action: "list", params: params)
     }
@@ -37,7 +41,7 @@ class FruitoreController {
             redirect(action: "list")
         }
         else {
-            [fruitoreInstance: fruitoreInstance]
+            [fruitoreInstance: fruitoreInstance,max:params.max,offset:params.offset]
         }
     }
 
@@ -67,7 +71,7 @@ class FruitoreController {
             fruitoreInstance.properties = params
             if (!fruitoreInstance.hasErrors() && fruitoreInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'fruitore.label', default: 'Fruitore'), fruitoreInstance.id])}"
-                redirect(action: "show", id: fruitoreInstance.id)
+                redirect(action: "show", id: fruitoreInstance.id,params:[max:params.max, offset: params.offset])
             }
             else {
                 render(view: "edit", model: [fruitoreInstance: fruitoreInstance])
@@ -99,10 +103,21 @@ class FruitoreController {
     }
 
     def result = { FruitoreCommand cmd ->
+		session.commandFruitori = cmd 
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         def fruitoreInstanceList = Fruitore.cercaFruitore(cmd, params)
         render(view: "list", model: [fruitoreInstanceList: fruitoreInstanceList, fruitoreInstanceTotal: fruitoreInstanceList.totalCount])
     }
+	def resultNavigation = { FruitoreCommand cmd ->
+		cmd = session.commandFruitori
+		if(!cmd){
+			redirect(action: "list")
+			return
+		}
+		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		def fruitoreInstanceList = Fruitore.cercaFruitore(cmd, params)
+		render(view: "list", model: [fruitoreInstanceList: fruitoreInstanceList, fruitoreInstanceTotal: fruitoreInstanceList.totalCount])
+	}
 }
 
 class FruitoreCommand {

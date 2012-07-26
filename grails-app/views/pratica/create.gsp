@@ -11,7 +11,7 @@
       
    <g:javascript library="jQuery/jquery.validate" />
    
-    <title><g:message code="default.create.label" args="[entityName]"/></title>
+    <title><g:message code="label.pratica.crea2" /></title>
    <script type="text/javascript">
  
   	  $(document).ready(function(){
@@ -33,7 +33,7 @@
 
 
 <div class="body">
-    <h1><g:message code="default.create.label" args="[entityName]"/></h1>
+    <h1><g:message code="label.pratica.crea2" /></h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>

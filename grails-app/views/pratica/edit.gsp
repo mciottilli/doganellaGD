@@ -10,7 +10,7 @@
     <g:javascript src="jQuery/jquery-ui-1.8.12.custom.min.js"/>
     <g:javascript library="jQuery/jquery.validate" />
     <g:set var="entityName" value="${message(code: 'pratica.label', default: 'Pratica')}"/>
-    <title><g:message code="default.edit.label" args="[entityName]"/></title>
+    <title><g:message code="label.pratica.modifica" /></title>
     <script type="text/javascript">
   	  $(document).ready(function(){
   		  var validator = $("#edit").validate({
@@ -31,7 +31,7 @@
 
 
 <div class="body">
-    <h1><g:message code="default.edit.label" args="[entityName]"/></h1>
+    <h1><g:message code="label.pratica.modifica" /></h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -43,6 +43,8 @@
     <g:form method="post" name="edit">
         <g:hiddenField name="id" value="${praticaInstance?.id}"/>
         <g:hiddenField name="version" value="${praticaInstance?.version}"/>
+        <g:hiddenField name="offset" value="${params.offset}"/>
+         <g:hiddenField name="max" value="${params.max}"/>
         <div class="dialog">
             <table>
                 <tbody>
@@ -159,7 +161,7 @@
         </div>
     </g:form>
     <div class="navigation">
-         <g:link class="button_nav" action="show" params="[id:praticaInstance.id]" ><g:message code="default.label.indietro" /></g:link>
+         <g:link class="button_nav" action="show" params="[id:praticaInstance.id,max:params.max,offset:params.offset]" ><g:message code="default.label.indietro" /></g:link>
     </div>
 </div>
 </body>

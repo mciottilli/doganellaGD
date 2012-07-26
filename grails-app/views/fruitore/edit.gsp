@@ -7,16 +7,36 @@
           href="${resource(dir: 'css/redmond', file: 'jquery-ui-1.8.13.custom.css')}"/>
     <g:javascript src="jQuery/jquery-1.5.1.min.js"/>
     <g:javascript src="jQuery/jquery-ui-1.8.12.custom.min.js"/>
-    <g:jqDatepickerLocale lang="it"/>
+      <g:javascript library="jQuery/jquery.validate" />
     <g:set var="entityName" value="${message(code: 'fruitore.label', default: 'Fruitore')}"/>
-    <title><g:message code="default.edit.label" args="[entityName]"/></title>
+    <title><g:message code="label.fruitore.modifica" /></title>
+    <script type="text/javascript">
+ 
+  	  $(document).ready(function(){
+  		  var validator = $("#edit").validate({
+  	  		
+  				rules: {
+  					nome: "required",
+  					cognome: "required",
+  					dataNascita: "required"
+  				},
+  				messages: {
+  					nome: "Campo Obbligatorio",
+  					cognome: "Campo Obbligatorio",
+  					dataNascita: "Campo Obbligatorio"
+  				
+  					
+  				}
+  		  });
+  	  });
+    </script>
 </head>
 
 <body>
 
 
 <div class="body">
-    <h1><g:message code="default.edit.label" args="[entityName]"/></h1>
+    <h1><g:message code="label.fruitore.modifica" /></h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -25,9 +45,11 @@
             <g:renderErrors bean="${fruitoreInstance}" as="list"/>
         </div>
     </g:hasErrors>
-    <g:form method="post">
+    <g:form method="post" name="edit">
         <g:hiddenField name="id" value="${fruitoreInstance?.id}"/>
         <g:hiddenField name="version" value="${fruitoreInstance?.version}"/>
+         <g:hiddenField name="offset" value="${params.offset}"/>
+         <g:hiddenField name="max" value="${params.max}"/>
         <div class="dialog">
             <table>
                 <tbody>
@@ -82,7 +104,7 @@
         </div>
     </g:form>
      <div class="navigation">
-        <g:link class="button_nav" action="show" params="[id:fruitoreInstance.id]" ><g:message code="default.label.indietro" /></g:link>
+        <g:link class="button_nav" action="show" params="[id:fruitoreInstance.id,max:params.max,offset:params.offset]" ><g:message code="default.label.indietro" /></g:link>
     </div>
 </div>
 </body>

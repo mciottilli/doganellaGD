@@ -11,7 +11,13 @@ class PraticaController {
     def index = {
         redirect(action: "list", params: params)
     }
+	def searchPratiche = {
+		session.removeAttribute("command")
+	}
 
+	def searchContenziosi = {
+		session.removeAttribute("commandContenzioso")
+	}
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         [praticaInstanceList: Pratica.list(params), praticaInstanceTotal: Pratica.count()]
@@ -35,7 +41,7 @@ class PraticaController {
 		def praticaInstance = new Pratica(stato:cmd.stato,fruitore:cmd.fruitore)
 		
 	
-		return [praticaInstance: praticaInstance]
+		return [praticaInstance: praticaInstance,max:params.max,offset:params.offset]
 	}
 
     def save = {PraticaCommand cmd ->
@@ -74,7 +80,7 @@ class PraticaController {
             redirect(action: "list")
         }
         else {
-            [praticaInstance: praticaInstance]
+            [praticaInstance: praticaInstance,max:params.max,offset:params.offset]
         }
     }
 
@@ -85,7 +91,7 @@ class PraticaController {
             redirect(action: "list")
         }
         else {
-            return [praticaInstance: praticaInstance]
+            return [praticaInstance: praticaInstance,max:params.max,offset:params.offset]
         }
     }
 
@@ -104,7 +110,7 @@ class PraticaController {
             praticaInstance.properties = params
             if (!praticaInstance.hasErrors() && praticaInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'pratica.label', default: 'Pratica'), praticaInstance.id])}"
-                redirect(action: "show", id: praticaInstance.id)
+                redirect(action: "show", id: praticaInstance.id,params:[max:params.max, offset: params.offset])
             }
             else {
                 render(view: "edit", model: [praticaInstance: praticaInstance])
@@ -136,16 +142,36 @@ class PraticaController {
     }
 
     def result = {PraticaCommand cmd ->
-		log.info "cerca...."
+		session.command = cmd
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         def praticaInstanceList = Pratica.cercaPratiche(cmd, params)
         render(view: "list", model: [praticaInstanceList: praticaInstanceList, praticaInstanceTotal: praticaInstanceList.totalCount])
 
 
     }
+	def resultNavigation = {PraticaCommand cmd ->
+		 cmd = session.command 
+		 if(!cmd){
+			 redirect(action: "list")
+			 return
+		 }
+		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		def praticaInstanceList = Pratica.cercaPratiche(cmd, params)
+		render(view: "list", model: [praticaInstanceList: praticaInstanceList, praticaInstanceTotal: praticaInstanceList.totalCount])
+
+
+	}
 	
 	def resultContenzioso = {PraticaCommand cmd ->
-		log.info "cerca...."
+		session.commandContenzioso = cmd
+		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		def praticaInstanceList = Pratica.cercaPraticheContenzioso(cmd, params)
+		render(view: "listContenzioso", model: [praticaInstanceList: praticaInstanceList, praticaInstanceTotal: praticaInstanceList.totalCount])
+
+
+	}
+	def resultContenziosoNavigation = {PraticaCommand cmd ->
+		cmd = session.commandContenzioso
 		params.max = Math.min(params.max ? params.int('max') : 10, 100)
 		def praticaInstanceList = Pratica.cercaPraticheContenzioso(cmd, params)
 		render(view: "listContenzioso", model: [praticaInstanceList: praticaInstanceList, praticaInstanceTotal: praticaInstanceList.totalCount])
@@ -197,7 +223,7 @@ class PraticaController {
             try {
                 docObj.delete(flush: true)
                 flash.message = "Documento eliminato con successo"
-                redirect(action: "attachDocument", id: praticaInstance.id)
+                redirect(action: "attachDocument", id: praticaInstance.id,,params:[max:params.max, offset: params.offset])
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
                 flash.message = "${message(code: 'default.not.deleted.message', args: [docObj.docName])}"
@@ -206,7 +232,7 @@ class PraticaController {
         }
         else {
             flash.message = "Non è stato possibile eliminare il documento"
-            redirect(action: "attachDocument", id: praticaInstance.id)
+            redirect(action: "attachDocument", id: praticaInstance.id,,params:[max:params.max, offset: params.offset])
         }
     }
 
@@ -222,7 +248,7 @@ class PraticaController {
         }
         if (praticaInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.attach.message', args: [fileName])}"
-            redirect(action: "show", id: praticaInstance.id)
+            redirect(action: "show", id: praticaInstance.id,params:[max:params.max, offset: params.offset])
         } else {
             flash.message = "Non è stato possibile allegare il documento"
             redirect(action: "attachDocument", id: params.id)

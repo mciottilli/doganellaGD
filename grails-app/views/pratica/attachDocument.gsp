@@ -8,7 +8,7 @@
      <g:javascript src="jQuery/jquery-1.5.1.min.js"/>
     <g:javascript src="jQuery/jquery-ui-1.8.12.custom.min.js"/>
    <g:javascript library="jQuery/jquery.validate" />
-    <title><g:message code="default.show.label" args="[entityName]"/></title>
+    <title><g:message code="label.pratica.allega" /></title>
     <script type="text/javascript">
  
   	  $(document).ready(function(){
@@ -29,7 +29,7 @@
 <body>
 
 <div class="body">
-    <h1><g:message code="default.show.label" args="[entityName]"/></h1>
+    <h1><g:message code="label.pratica.allega" /></h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -50,7 +50,7 @@
                     <td>${index.docName}</td>
                     <td><g:formatDate format="dd/MM/yyy" date="${index.dataCreazione}"/></td>
                     <td><g:link action="showDocumento" params="[id:index.id]"><img src="${resource(dir:'images/skin',file:'database_show.png')}" alt="${message(code: 'default.label.table.detail')}" border="0" title="${message(code: 'default.label.table.detail')}" /></g:link></td>
-                    <td><g:link action="deleteDocumento" params="[id:index.id,idPratica:praticaInstance.id]" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><img src="${resource(dir:'images/skin',file:'database_delete.png')}" alt="${message(code: 'default.label.table.delete')}" border="0" title="${message(code: 'default.label.table.delete')}" /></g:link></td>
+                    <td><g:link action="deleteDocumento" params="[id:index.id,idPratica:praticaInstance.id,max:params.max,offset:params.offset]" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><img src="${resource(dir:'images/skin',file:'database_delete.png')}" alt="${message(code: 'default.label.table.delete')}" border="0" title="${message(code: 'default.label.table.delete')}" /></g:link></td>
                 </tr>
             </g:each>
         </table>
@@ -59,7 +59,8 @@
 </g:if>
     <fieldset>
         <g:uploadForm name="attach">
-
+  <g:hiddenField name="offset" value="${params.offset}"/>
+         <g:hiddenField name="max" value="${params.max}"/>
             <table>
                 <tbody>
 
@@ -81,7 +82,7 @@
         </g:uploadForm>
     </fieldset>
  <div class="navigation">
-       <g:link class="button_nav" action="show" params="[id:praticaInstance.id]" ><g:message code="default.label.indietro" /></g:link>
+       <g:link class="button_nav" action="show" params="[id:praticaInstance.id,max:params.max,offset:params.offset]" ><g:message code="default.label.indietro" /></g:link>
  </div>
 </div>
 

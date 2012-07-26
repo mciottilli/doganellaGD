@@ -4,19 +4,41 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'fruitore.label', default: 'Fruitore')}"/>
-    <title><g:message code="default.create.label" args="[entityName]"/></title>
-    <link rel="stylesheet" media="all" type="text/css"
-          href="${resource(dir: 'css/redmond', file: 'jquery-ui-1.8.13.custom.css')}"/>
+    <title><g:message code="label.fruitore.crea" /></title>
+    <link rel="stylesheet" media="all" type="text/css" href="${resource(dir: 'css/redmond', file: 'jquery-ui-1.8.13.custom.css')}"/>
     <g:javascript src="jQuery/jquery-1.5.1.min.js"/>
     <g:javascript src="jQuery/jquery-ui-1.8.12.custom.min.js"/>
-    <g:jqDatepickerLocale lang="it"/>
+     
+    <g:javascript library="jQuery/jquery.validate" />
+  
+     
+     <script type="text/javascript">
+ 
+  	  $(document).ready(function(){
+  		  var validator = $("#create").validate({
+  	  		
+  				rules: {
+  					nome: "required",
+  					cognome: "required",
+  					dataNascita: "required"
+  				},
+  				messages: {
+  					nome: "Campo Obbligatorio",
+  					cognome: "Campo Obbligatorio",
+  					dataNascita: "Campo Obbligatorio"
+  				
+  					
+  				}
+  		  });
+  	  });
+    </script>
 </head>
 
 <body>
 
 
 <div class="body">
-    <h1><g:message code="default.create.label" args="[entityName]"/></h1>
+    <h1><g:message code="label.fruitore.crea" /></h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -25,11 +47,10 @@
             <g:renderErrors bean="${fruitoreInstance}" as="list"/>
         </div>
     </g:hasErrors>
-    <g:form action="save">
+    <g:form action="save" name="create">
         <div class="dialog">
             <table>
                 <tbody>
-
                 <tr class="prop">
                     <td class="name">
                         <label for="nome"><g:message code="fruitore.nome.label" default="Nome"/></label>

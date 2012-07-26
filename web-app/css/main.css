@@ -308,3 +308,56 @@ th.desc a {
     background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
+.buttons input.changePwd {
+    background: transparent url(../images/icon_key.gif) 5px 50% no-repeat;
+    padding-left: 23px;
+     
+}
+
+.menu {
+	padding:0 16px 0 16px; 
+	margin:auto;
+	width:93%; 
+	list-style:none; 
+	height:40px; 
+	background: url(../images/menu.png) repeat-x; 
+	position:relative; 
+	font-family:arial, verdana, sans-serif; 
+	border-radius: 4px 4px 11px 11px;
+}
+.menu li.top {
+	display:block; 
+	position:relative;
+	float:left;
+}
+.menu li a.top_link {
+	display:block; 
+	float:left; 
+	height:40px; 
+	line-height:33px; 
+	color:#fcfcff; 
+	text-decoration:none; 
+	font-size:11px; 
+	font-weight:bold; 
+	padding:0 0 0 12px; 
+	cursor:pointer;
+}
+.menu li a.top_link span {
+	float:left; 
+	font-weight:bold; 
+	display:block; 
+	padding:0 24px 0 12px; 
+	height:40px;
+}
+.menu li a.top_link:hover {
+	color:#000; 
+	background: url(../images/hover.png) no-repeat;
+}
+.menu li a.top_link:hover span {
+	background: url(../images/hover.png) no-repeat right top;
+}
+
+
+
+
+

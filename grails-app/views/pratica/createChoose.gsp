@@ -10,7 +10,7 @@
    <g:jqDatepickerLocale lang="it"/>
     <g:javascript src="jQuery/jquery.ui.autocomplete.js"/>
     <g:javascript library="jQuery/jquery.validate" />
-    <title><g:message code="default.create.label" args="[entityName]"/></title>
+    <title><g:message code="label.pratica.crea1" /></title>
     <script type="text/javascript">
     $(document).ready(function() {
         $('#fruitoreid').autocomplete({
@@ -41,7 +41,7 @@
 
 
 <div class="body">
-    <h1><g:message code="default.create.label" args="[entityName]"/></h1>
+    <h1><g:message code="label.pratica.crea1" /></h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
@@ -80,7 +80,7 @@
         </div>
     </g:form>
      <div class="navigation">
-        <g:link class="button_nav" action="list" ><g:message code="default.label.indietro" /></g:link>
+        <g:link class="button_nav" action="list" params="[max:params.max,offset:params.offset]"><g:message code="default.label.indietro" /></g:link>
     </div>
 </div>
 </body>

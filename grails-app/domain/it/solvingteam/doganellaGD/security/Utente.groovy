@@ -6,6 +6,8 @@ class Utente {
 
 	String username
 	String password
+	String nome 
+	String cognome
 	boolean enabled
 	boolean accountExpired
 	boolean accountLocked
@@ -13,7 +15,9 @@ class Utente {
 
 	static constraints = {
 		username blank: false, unique: true
-		password blank: false
+		password (blank: false)
+		nome(nullable:false)
+		cognome(nullable:false)
 	}
 
 	static mapping = {

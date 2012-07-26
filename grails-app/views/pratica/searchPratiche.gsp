@@ -25,6 +25,7 @@
                 </div>
             </g:hasErrors>
             <g:form method="post" controller="pratica">
+             
 
                 <div class="dialog">
                     <table>
@@ -100,12 +101,10 @@
                         </tbody>
                     </table>
                 </div>
-
+ 		
                 <div class="buttons">
-                    <span class="button"><g:actionSubmit class="save" action="result"
-                                                         value="${message(code: 'default.button.search.label', default: 'Cerca')}"/></span>
-                    <span class="button"><g:actionSubmit class="save" action="createChoose"
-                                                         value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
+                    <span class="button"><g:actionSubmit class="save" action="result" value="${message(code: 'default.button.search.label', default: 'Cerca')}"/></span>
+                    <span class="button"><g:actionSubmit class="save" action="createChoose" value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
                 </div>
             </g:form>
 

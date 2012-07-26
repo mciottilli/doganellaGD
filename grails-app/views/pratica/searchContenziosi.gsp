@@ -1,35 +1,36 @@
+<%@ page import="it.solvingteam.doganellaGD.core.Pratica" %>
 <html>
 <head>
-    <title><g:message code="label.pratica.gestione" /></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
     <link rel="stylesheet" media="all" type="text/css"
           href="${resource(dir: 'css/redmond', file: 'jquery-ui-1.8.13.custom.css')}"/>
+    <g:set var="entityName" value="${message(code: 'pratica.label', default: 'Pratica')}"/>
     <g:javascript src="jQuery/jquery-1.5.1.min.js"/>
     <g:javascript src="jQuery/jquery-ui-1.8.12.custom.min.js"/>
-
+    <g:set var="entityName" value="${message(code: 'pratica.label', default: 'Pratica')}"/>
+    <title>Gestione Contenziosi</title>
    
-    <g:jqDatepickerLocale lang="it"/>
-
 </head>
 
 <body>
-<div class="body">
-<h1><g:message code="label.pratica.gestione" /></h1>
-   
-            <g:if test="${flash.message}">
-                <div class="message">${flash.message}</div>
-            </g:if>
-            <g:hasErrors bean="${praticaInstance}">
-                <div class="errors">
-                    <g:renderErrors bean="${praticaInstance}" as="list"/>
-                </div>
-            </g:hasErrors>
-            <g:form method="post" controller="pratica">
 
+
+<div class="body">
+    <h1>Gestione Contenziosi</h1>
+    <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
+    </g:if>
+    <g:hasErrors bean="${praticaInstance}">
+        <div class="errors">
+            <g:renderErrors bean="${praticaInstance}" as="list"/>
+        </div>
+    </g:hasErrors>
+   <g:form method="post" controller="pratica">
+			
                 <div class="dialog">
                     <table>
                         <tbody>
-
 				<tr class="prop">
                     <td class="name">
                         <label for="stato.id"><g:message code="pratica.stato.label" default="Stato"/></label>
@@ -40,7 +41,6 @@
                         </g:radioGroup>
                     </td>
                 </tr>
-
                         <tr class="prop">
                             <td class="name">
                                 <label for="numeroProtocollo"><g:message code="pratica.numeroProtocollo.label"
@@ -51,7 +51,7 @@
                             </td>
                         </tr>
 
-                        <tr class="prop">
+                         <tr class="prop">
                             <td class="name">
                                 <label for="dataAcquisizione"><g:message code="pratica.dataAcquisizione.label" default="Data Acquisizione"/></label>
                             </td>
@@ -79,7 +79,7 @@
                                 <g:textField name="descrizione" value="${praticaInstance?.descrizione}"/>
                             </td>
                         </tr>
-                        <tr class="prop">
+ 					<tr class="prop">
                             <td class="name">
                                 <label for="descrizione"><g:message code="pratica.numeroPosizione.label" default="Numero Posizione" /></label>
                             </td>
@@ -87,7 +87,6 @@
                                 <g:textField name="numeroPosizione" value="${praticaInstance?.numeroPosizione}"/>
                             </td>
                         </tr>
-
                         <tr class="prop">
                             <td class="name">
                                 <label for="fruitore"><g:message code="pratica.fruitore.label" default="Nome Cognome Codice" /></label>
@@ -102,14 +101,10 @@
                 </div>
 
                 <div class="buttons">
-                    <span class="button"><g:actionSubmit class="save" action="result"
-                                                         value="${message(code: 'default.button.search.label', default: 'Cerca')}"/></span>
-                    <span class="button"><g:actionSubmit class="save" action="createChoose"
-                                                         value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
+                    <span class="button"><g:actionSubmit class="save" action="resultContenzioso" value="${message(code: 'default.button.search.label', default: 'Cerca')}"/></span>
                 </div>
             </g:form>
-
+  
 </div>
-
 </body>
 </html>
