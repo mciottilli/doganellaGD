@@ -77,7 +77,7 @@
 	    <g:hiddenField name="offset" value="${params.offset}"/>
          <g:hiddenField name="max" value="${params.max}"/>
 	      <div class="buttons">
-             <span class="button"><g:actionSubmit class="save" action="createChoose" value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
+             <span class="button"><g:actionSubmit class="save" action="createChoose" value="${message(code: 'default.button.create.pratica.label', default: 'Create')}"/></span>
           </div>
             
     	</g:form>

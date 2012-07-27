@@ -27,7 +27,7 @@ class PraticaController {
     def createChoose = {
         def praticaInstance = new Pratica()
         praticaInstance.properties = params
-        return [praticaInstance: praticaInstance]
+        return [praticaInstance: praticaInstance,contenzioso:params.contenzioso]
     }
 	
 	def create = {PraticaCommand cmd ->
@@ -41,7 +41,7 @@ class PraticaController {
 		def praticaInstance = new Pratica(stato:cmd.stato,fruitore:cmd.fruitore)
 		
 	
-		return [praticaInstance: praticaInstance,max:params.max,offset:params.offset]
+		return [praticaInstance: praticaInstance,max:params.max,offset:params.offset,contenzioso:params.contenzioso]
 	}
 
     def save = {PraticaCommand cmd ->
@@ -91,7 +91,7 @@ class PraticaController {
             redirect(action: "list")
         }
         else {
-            return [praticaInstance: praticaInstance,max:params.max,offset:params.offset]
+            return [praticaInstance: praticaInstance,max:params.max,offset:params.offset,contenzioso:params.contenzioso]
         }
     }
 
@@ -152,7 +152,7 @@ class PraticaController {
 	def resultNavigation = {PraticaCommand cmd ->
 		 cmd = session.command 
 		 if(!cmd){
-			 redirect(action: "list")
+			 redirect(action: "searchPratiche")
 			 return
 		 }
 		params.max = Math.min(params.max ? params.int('max') : 10, 100)

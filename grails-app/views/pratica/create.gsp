@@ -148,7 +148,7 @@
         </div>
     </g:form>
      <div class="navigation">
-        <g:link class="button_nav" action="createChoose" ><g:message code="default.label.indietro" /></g:link>
+        <g:link class="button_nav" action="createChoose" params="[contenzioso:params.contenzioso]"><g:message code="default.label.indietro" /></g:link>
     </div>
 </div>
 </body>

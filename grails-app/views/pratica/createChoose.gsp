@@ -76,11 +76,18 @@
             </table>
         </div>
         <div class="buttons">
+        <g:hiddenField name="contenzioso" value="${params.contenzioso }"/>
             <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.confirm.label', default: 'Conferma')}"/></span>
         </div>
     </g:form>
      <div class="navigation">
-        <g:link class="button_nav" action="list" params="[max:params.max,offset:params.offset]"><g:message code="default.label.indietro" /></g:link>
+     <g:if test="${params.contenzioso == 'si'}">
+     <g:link class="button_nav" action="resultContenziosoNavigation" params="[max:params.max,offset:params.offset]"><g:message code="default.label.indietro" /></g:link>
+    </g:if>
+   <g:else>
+<g:link class="button_nav" action="resultNavigation" params="[max:params.max,offset:params.offset]"><g:message code="default.label.indietro" /></g:link>
+   </g:else>
+        
     </div>
 </div>
 </body>

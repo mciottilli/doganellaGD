@@ -71,6 +71,7 @@
 	    		</g:else>
 	    		<g:form>
 	      			<div class="buttons">
+	      			<g:hiddenField name="contenzioso" value="si"/>
              			<span class="button"><g:actionSubmit class="save" action="createChoose" value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
           			</div>
     			</g:form>

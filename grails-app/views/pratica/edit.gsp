@@ -161,7 +161,7 @@
         </div>
     </g:form>
     <div class="navigation">
-         <g:link class="button_nav" action="show" params="[id:praticaInstance.id,max:params.max,offset:params.offset]" ><g:message code="default.label.indietro" /></g:link>
+         <g:link class="button_nav" action="show" params="[id:praticaInstance.id,max:params.max,offset:params.offset,contenzioso:params.contenzioso]" ><g:message code="default.label.indietro" /></g:link>
     </div>
 </div>
 </body>
